@@ -1,3 +1,4 @@
+ run logstash
  ```
 docker run -d --rm --name logstash -p 12201:12201/udp --network=opensearch-logstash-plugin_opensearch-net opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.2 -e 'input {
     gelf {
@@ -15,15 +16,7 @@ output	{
    }
  }'
  ```
- logging:
-      driver: gelf
-      options:
-        gelf-address: "udp://localhost:12201"
-        tag: "demo2_app"
-        docker run --network=opensearch-logstash-plugin_opensearch-net --log-driver gelf --log-opt gelf-address="udp://logstash:12201" --log-opt tag=testcontainer test:test
-          splunk 
-
- curl -XPOST http://localhost:9200/_cluster/health?pretty=true -H 'Content-Type: application/json' -d '{"enabled": true}'
 
 
-   docker run --network opensearch-logstash-plugin_opensearch-net --log-driver gelf --log-opt gelf-address="tcp://localhost:12201" --log-opt tag=testcontainer test:test
+## for some reason network service name does is not resolved. either host ip or container ip, kuberentes would allow loadbalancer and ingress
+   docker run --network=opensearch-logstash-plugin_opensearch-net --log-driver gelf --log-opt gelf-address=udp://<hostIP>:12201 --log-opt tag=testcontainer test:test
