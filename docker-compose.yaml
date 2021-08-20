@@ -1,8 +1,8 @@
 version: '3'
 services:
-  opensearch-node1:
+  opensearch:
     image: opensearchproject/opensearch:1.0.0
-    container_name: opensearch-node1
+    container_name: opensearch
     environment:
       - cluster.name=opensearch-cluster
       - discovery.type=single-node
@@ -18,10 +18,21 @@ services:
       - ./data/:/usr/share/opensearch/data
     ports:
       - 9200:9200
-      #- 9600:9600 # required for Performance Analyzer
     networks:
       - opensearch-net
-  
+
+  logstash:
+    image: opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.2
+    container_name: logstash
+    ports:
+      - 12201:12201/udp
+    volumes:
+      - ./logstash.conf/:/logstash_dir/logstash.conf
+      - ./logstash.yml:/usr/share/logstash/config/logstash.yml
+    command: logstash -f /logstash_dir/logstash.conf
+    networks:
+      - opensearch-net
+
   opensearch-dashboards:
     image: opensearchproject/opensearch-dashboards:1.0.0
     container_name: opensearch-dashboards
@@ -30,13 +41,13 @@ services:
     expose:
       - "5601"
     environment:
-      OPENSEARCH_HOSTS: '["https://opensearch-node1:9200"]' # must be a string with no spaces when specified as an environment variable
+      OPENSEARCH_HOSTS: '["https://opensearch:9200"]' # must be a string with no spaces when specified as an environment variable
     networks:
       - opensearch-net
 
 
 volumes:
-  opensearch-node1:
+  opensearch:
 
 networks:
   opensearch-net:
