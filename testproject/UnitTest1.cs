@@ -28,7 +28,7 @@ namespace jtest
         public void Test2(string one)
         {
             string str = "b";
-            str.Should().Be("b", "because I expected list {0} to contain that many items",str);
+            str.Should().Be("a", "because I expected list {0} to contain that many items",str);
         }
     }
 }
