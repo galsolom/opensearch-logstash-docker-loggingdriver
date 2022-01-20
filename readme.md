@@ -15,6 +15,12 @@ docker compose up -d
 ```
 cd testproject
 docker build .  -t test:test
-docker run --rm --log-driver gelf --log-opt gelf-address=udp://localhost:12201 --log-opt tag=testcontainer --log-opt tag=testcontainer test:test
+docker run --log-driver=fluentd --log-opt fluentd-address=localhost:24224 --log-opt tag=qa  test:test
 ```
 * check --log-opt labels=production_status,geo
+pattern => "(^.+Failed.+)|(^.+Error.+)|(^.+System.+)|(^.+Stack.+)|(^.+at.+)|(^s*End of:.+)"
+
+
+
+## FLUENTD
+docker run --log-driver=fluentd --log-opt fluentd-address=localhost:24224
