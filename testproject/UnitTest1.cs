@@ -17,6 +17,7 @@ namespace jtest
 
         [Theory]
         [InlineData("1")]
+        [Trait("tc","1338")]
         public void Test1(string one)
         {
             string actual = "1";
@@ -25,10 +26,11 @@ namespace jtest
         }
         [Theory]
         [InlineData("1")]
+        [Trait("tc","1337")]
         public void Test2(string one)
         {
-            string str = "b";
-            str.Should().Be("a", "because I expected list {0} to contain that many items",str);
+            string str = "a";
+            str.Should().Be("b", "because I expected list {0} to contain that many items",str);
         }
     }
 }

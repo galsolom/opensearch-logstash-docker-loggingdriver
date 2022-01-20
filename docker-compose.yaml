@@ -18,6 +18,8 @@ services:
       - ./data/:/usr/share/opensearch/data
     ports:
       - 9200:9200
+    expose:
+      - "9200"
     networks:
       - opensearch-net
 
@@ -45,6 +47,20 @@ services:
     networks:
       - opensearch-net
 
+  fluentd:
+    image: fluentd:esplugin
+    container_name: fluentd
+    environment: 
+      FLUENTD_CONF: demo.conf
+    ports:
+      - "24224:24224"
+      - "24224:24224/udp"
+    expose:
+      - "24224"
+    volumes:
+      - ./demo.conf/:/fluentd/etc/demo.conf
+    networks:
+      - opensearch-net
 
 volumes:
   opensearch:

@@ -1,0 +1,10 @@
+{
+    "1337":{
+        "labels":["ams","user_managment","entities"],
+        "domains":["crm","identity","dashboard"]
+    },
+    "1338":{
+        "labels":["submission","interview","entities","appetite"],
+        "domains":["markets"]
+    }
+}
