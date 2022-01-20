@@ -24,3 +24,22 @@ pattern => "(^.+Failed.+)|(^.+Error.+)|(^.+System.+)|(^.+Stack.+)|(^.+at.+)|(^s*
 
 ## FLUENTD
 docker run --log-driver=fluentd --log-opt fluentd-address=localhost:24224
+
+
+
+
+# simple poc for testing..
+requirements, python3, dotnet
+DB is labels.json
+to run:
+cmd:
+```
+# will run only test case 1337
+python3 labels.py identity
+
+# will run only test case 1338
+python3 labels.py submission
+
+# will run both
+python3 labels.py entities
+```
