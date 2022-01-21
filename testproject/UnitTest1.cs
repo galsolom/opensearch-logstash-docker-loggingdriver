@@ -29,7 +29,7 @@ namespace jtest
         [Trait("tc","1337")]
         public void Test2(string one)
         {
-            string str = "a";
+            string str = "b";
             str.Should().Be("b", "because I expected list {0} to contain that many items",str);
         }
     }

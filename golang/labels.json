@@ -1,0 +1,14 @@
+[
+    {
+    "id":"1337",
+    "name":"someName1",
+    "labels":["ams","user_managment","entities"],
+    "domains":["crm","identity","dashboard"]
+    },
+    {
+    "id":"1338",
+    "name":"someName2",
+    "labels":["submission","interview","entities","appetite"],
+    "domains":["markets"]
+    }
+]
